@@ -10,12 +10,13 @@ primary_region = "gru"
   auto_stop_machines = "off"
   min_machines_running = 1
 
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
+[[services.ports]]
+  port = 80
+  handlers = ["http"]
 
-  [[services.http_checks]]
-    path = "/"
+[[services.ports]]
+  port = 443
+  handlers = ["tls", "http"]
+
+[[services.http_checks]]
+  path = "/"
