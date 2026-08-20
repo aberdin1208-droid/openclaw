@@ -4,19 +4,28 @@ primary_region = "gru"
 [build]
   image = "ghcr.io/openclaw/openclaw:latest"
 
+[env]
+  NODE_ENV = "production"
+
 [[services]]
   internal_port = 18789
   protocol = "tcp"
   auto_stop_machines = "off"
   min_machines_running = 1
 
-[[services.ports]]
-  port = 80
-  handlers = ["http"]
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
 
-[[services.ports]]
-  port = 443
-  handlers = ["tls", "http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
 
-[[services.http_checks]]
-  path = "/"
+  [[services.http_checks]]
+    path = "/"
+    interval = "30s"
+    timeout = "5s"
+
+[[mounts]]
+  source = "claw_data"
+  destination = "/home/node/.openclaw"
