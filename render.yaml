@@ -4,15 +4,13 @@ services:
     runtime: docker
     plan: starter
     dockerfilePath: ./Dockerfile
-    dockerCommand: openclaw gateway --port 10000 --host 0.0.0.0 --allow-unconfigured
+    dockerCommand: openclaw gateway --allow-unconfigured
     healthCheckPath: /
     envVars:
             - key: NODE_ENV
         value: production
             - key: PORT
         value: "10000"
-            - key: HOST
-        value: "0.0.0.0"
             - key: OPENCLAW_GATEWAY_PORT
         value: "10000"
             - key: OPENCLAW_STATE_DIR
