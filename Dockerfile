@@ -1,14 +1,15 @@
-FROM node:22-slim
+FROM node:22-bookworm
 
+RUN npm install -g openclaw@latest
+
+RUN mkdir -p /root/.openclaw
+
+RUN echo '{"gateway":{"controlUi":{"allowedOrigins":["https://openclaw-7h1p.onrender.com","wss://openclaw-7h1p.onrender.com"],"dangerouslyDisableDeviceAuth":true}}}' > /root/.openclaw/openclaw.json
+
+ENV PORT=18789
+ENV OPENCLAW_GATEWAY_PORT=18789
 ENV NODE_ENV=production
 
-RUN npm i -g openclaw@latest
+EXPOSE 18789
 
-WORKDIR /app
-
-RUN mkdir -p /root/.openclaw && \
-  echo '{"gateway":{"controlUi":{"allowedOrigins":["https://openclaw-7h1p.onrender.com","https://wss.openclaw-7h1p.onrender.com","https://dashboard.render.com"]}}}' > /root/.openclaw/openclaw.json
-
-EXPOSE 10000
-
-CMD ["sh", "-c", "openclaw gateway --bind lan --port ${PORT:-10000} --allow-unconfigured"]
+CMD ["sh","-c","openclaw gateway run --port ${PORT} --bind 0.0.0.0"]
