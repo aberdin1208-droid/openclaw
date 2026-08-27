@@ -4,4 +4,4 @@ RUN npm install -g openclaw@latest
 WORKDIR /app
 RUN mkdir -p /root/.openclaw /app/.openclaw /app/.openclaw/workspace
 EXPOSE 10000
-CMD ["sh", "-c", "openclaw gateway --allow-unconfigured --port ${OPENCLAW_GATEWAY_PORT:-${PORT:-10000}} --verbose"]
+CMD ["sh", "-c", "openclaw gateway --bind lan --allow-unconfigured --port ${OPENCLAW_GATEWAY_PORT:-${PORT:-10000}} --verbose"]
