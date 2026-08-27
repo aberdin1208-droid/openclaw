@@ -6,6 +6,8 @@ primary_region = "gru"
 
 [env]
   NODE_ENV = "production"
+  PORT = "18789"
+  HOST = "0.0.0.0"
 
 [[services]]
   internal_port = 18789
@@ -25,7 +27,9 @@ primary_region = "gru"
     path = "/"
     interval = "30s"
     timeout = "5s"
+    grace_period = "30s"
 
-[[mounts]]
-  source = "claw_data"
-  destination = "/home/node/.openclaw"
+[[vm]]
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
